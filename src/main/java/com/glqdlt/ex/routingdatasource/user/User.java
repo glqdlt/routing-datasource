@@ -1,8 +1,6 @@
 package com.glqdlt.ex.routingdatasource.user;
 
 import lombok.Data;
-import org.apache.ibatis.annotations.Arg;
-import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.type.Alias;
 
 import javax.persistence.*;
