@@ -1,6 +1,7 @@
 package com.glqdlt.ex.routingdatasource;
 
 import lombok.extern.slf4j.Slf4j;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class RoutingDatasourceApplicationTests {
 
     @Autowired
-    SlaveService someService;
+    SlaveService slaveService;
+
+    @Autowired
+    MasterService masterService;
 
     @Test
     public void contextLoads() {
@@ -21,7 +25,17 @@ public class RoutingDatasourceApplicationTests {
 
     @Test
     public void findSlaveUsers() {
-        someService.findAllSlaveUsers();
+        Assert.assertEquals(1, slaveService.findAllSlaveUsers().size());
     }
 
+    @Test
+    public void findMasterUsers() {
+        log.info(masterService.findAllMasterUsers().toString());
+        Assert.assertNotEquals(1,masterService.findAllMasterUsers().size());
+    }
+
+    @Test
+    public void name() {
+        masterService.findSlaveSaveMaster();
+    }
 }

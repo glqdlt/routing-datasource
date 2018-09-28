@@ -17,9 +17,17 @@ public class MasterService {
     @Autowired
     UserRepo userRepo;
 
+    @Autowired
+    SlaveService slaveService;
+
     @Transactional(transactionManager = "transactionManager")
     public List<User> findAllMasterUsers(){
         return userRepo.findAll();
+    }
+
+    @Transactional
+    public User findBySeq(Integer seq){
+        return userRepo.findBySeq(seq);
     }
 
     @Transactional(transactionManager = "transactionManager")
@@ -30,6 +38,22 @@ public class MasterService {
         user.setRegDate(new Date());
         userRepo.save(user);
         userRepo.flush();
+    }
+
+    @Transactional(transactionManager = "transactionManager")
+    public void saveUser(User user){
+        userRepo.save(user);
+        userRepo.flush();
+    }
+
+    @Transactional()
+    public void findSlaveSaveMaster(){
+        log.info("find to slave...");
+        User slaveUser = slaveService.findBySeqUser(1);
+        log.info("find it : {}",slaveUser.toString());
+        saveUser(slaveUser);
+        User masterUser = findBySeq(slaveUser.getSeq());
+        log.info("mastered : {}",masterUser.toString());
     }
 
 
