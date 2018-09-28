@@ -54,7 +54,7 @@ public class DataSourceConfig {
     }
 
     @Primary
-    @Bean("dataSource")
+    @Bean("replicationDataSource")
     public DataSource lazyDataSource() {
         return new LazyConnectionDataSourceProxy(routingDataSource());
     }

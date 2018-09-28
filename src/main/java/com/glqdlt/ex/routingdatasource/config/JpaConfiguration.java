@@ -24,6 +24,7 @@ import java.util.Properties;
 public class JpaConfiguration {
 
     @Autowired
+    @Qualifier("replicationDataSource")
     DataSource dataSource;
 
     private Properties additionalProperties() {
