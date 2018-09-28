@@ -35,7 +35,24 @@ public class RoutingDatasourceApplicationTests {
     }
 
     @Test
-    public void name() {
+    public void findSlaveSaveMaster() {
         masterService.findSlaveSaveMaster();
     }
+
+    @Test
+    public void findMybatisSlave(){
+        log.info(slaveService.findUserBySeqMybatis(1).toString());
+    }
+
+
+    @Test
+    public void findMybatisMaster(){
+        log.info(masterService.findUserBySeqMybatis(3).toString());
+    }
+
+    @Test
+    public void findSlaveWithMasterJpa(){
+        masterService.findSlaveOrmSaveMasterMybatis();
+    }
+
 }

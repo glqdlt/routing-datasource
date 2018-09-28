@@ -1,13 +1,16 @@
 package com.glqdlt.ex.routingdatasource.user;
 
 import lombok.Data;
+import org.apache.ibatis.annotations.Arg;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.type.Alias;
 
 import javax.persistence.*;
 import java.util.Date;
 
+@Alias("user")
 @Data
-@Entity()
-@Table(name = "user")
+@Entity(name = "user")
 public class User {
 
     @Id

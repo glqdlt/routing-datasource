@@ -1,6 +1,7 @@
 package com.glqdlt.ex.routingdatasource;
 
 import com.glqdlt.ex.routingdatasource.user.User;
+import com.glqdlt.ex.routingdatasource.user.UserMapper;
 import com.glqdlt.ex.routingdatasource.user.UserRepo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,9 @@ public class SlaveService {
 
     @Autowired
     UserRepo userRepo;
+
+    @Autowired
+    UserMapper userMapper;
 
 //    public 이 붙어야지  @Transactional(readOnly = true) 의 readOnly 가 적용된다.
 //    실제로 TransactionSynchronizationManager.isCurrentTransactionReadOnly() ? 를 찍어보면.. public 의 유무에 따라 동작안하는 것을 확인할 수가 있다.
@@ -37,6 +41,11 @@ public class SlaveService {
     public User findBySeqUser(Integer seq) {
         return userRepo.findBySeq(seq);
 
+    }
+
+    @Transactional(readOnly = true,propagation = Propagation.REQUIRES_NEW)
+    public User findUserBySeqMybatis(Integer seq){
+        return userMapper.findUserBySeq(seq);
     }
 
 
