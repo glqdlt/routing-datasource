@@ -6,6 +6,6 @@ import org.springframework.transaction.support.TransactionSynchronizationManager
 public class ReplicationDataSource extends AbstractRoutingDataSource {
     @Override
     protected Object determineCurrentLookupKey() {
-        return TransactionSynchronizationManager.isCurrentTransactionReadOnly() ? "slave" : "master";
+        return TransactionSynchronizationManager.isCurrentTransactionReadOnly() ? ReplicationType.SLAVE : ReplicationType.MASTER;
     }
 }

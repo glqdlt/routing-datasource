@@ -46,8 +46,8 @@ public class DataSourceConfig {
     public DataSource routingDataSource() {
         ReplicationDataSource routingDataSource = new ReplicationDataSource();
         Map<Object, Object> sources = new HashMap<>();
-        sources.put("master", masterSource());
-        sources.put("slave", slaveSource());
+        sources.put(ReplicationType.MASTER, masterSource());
+        sources.put(ReplicationType.SLAVE, slaveSource());
         routingDataSource.setTargetDataSources(sources);
         routingDataSource.setDefaultTargetDataSource(masterSource());
         return routingDataSource;
